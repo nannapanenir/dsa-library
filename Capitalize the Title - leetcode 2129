@@ -1,0 +1,22 @@
+2129. Capitalize the Title
+
+/**
+ * @param {string} title
+ * @return {string}
+ */
+var capitalizeTitle = function(title) {
+    let allWords=title.split(" ");
+    let ans=""
+    for(let indx=0;indx<allWords.length;indx++){
+        if(allWords[indx].length>=3){
+           allWords[indx].toLowerCase()
+            let toUpper=allWords[indx].substr(0,1).toUpperCase();
+            let toLower=allWords[indx].substr(1,allWords[indx].length).toLowerCase();
+            ans+=(toUpper+toLower)+' ';
+        }else{
+            ans+=allWords[indx].toLowerCase()+' '
+        }
+    }
+
+    return ans.trim();
+};
