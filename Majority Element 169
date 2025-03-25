@@ -1,0 +1,66 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+
+    There's only two major things to notice when we are dealing with majoriy elements 
+    Pre req initilize two variables i.e count and majority-element
+    step 1: when the count is zero, assign the majority element with current element and make count as 1
+    step 2: if majority element is found in future calls count them
+    step 3: else reduce the count 
+    stem 4: in such way we will be ended with majoriy element     
+ */
+var majorityElement = function(nums) {
+    let m=0,count=0;
+    for(let i=0;i<nums.length;i++){
+     if(count==0){
+        m=nums[i];
+        count=1;
+     }   
+     else if(m==nums[i]){
+        count++;
+     }else{
+        count--;
+     }
+    }
+    return m;
+};
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ 
+var majorityElement = function(nums) {
+    let ans=0;
+
+    let map= new Map();
+
+    for(let i=0;i<nums.length;i++){
+        if(map.has(nums[i])){
+            map.set(nums[i], map.get(nums[i])+1);
+        }else{
+            map.set(nums[i], 1);   
+        }
+    }
+    let value=0
+    for(let [key,val] of map){
+        if(value<val){
+            ans=key;
+            value=val;
+        }
+            
+    }
+    return ans;
+};
+
+Also we can easily find out the majoriy element with sorting technique  if n is even it can element can be at len/2 [n/2 -1  if n is even]
+var majorityElement = function(nums) {
+    nums.sort((a,b)=>a-b);
+
+    len=nums.length;
+
+    return len%2==0 ? nums[Math.floor(len/2)-1] : nums[Math.floor(len/2)];
+
+};
+
+ */
