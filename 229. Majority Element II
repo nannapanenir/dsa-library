@@ -1,0 +1,64 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ Below are the ground breaking rules for majarity element
+
+ There can be at most one majority element which is more than ⌊n/2⌋ times.
+ There can be at most two majority elements which are more than ⌊n/3⌋ times.
+ There can be at most three majority elements which are more than ⌊n/4⌋ times. and so on.
+
+ let's walk through the code :
+
+ take four variables as below two for count and two for majority elements
+ initilize the count to zero and candidate element to null or undefined since we have not started yet.
+ 
+ now check if candidate element is null then assign to candidate1 , in the same fasion we would do same to the candidate2 element
+
+ if the count is zero will go for second element if both are not prasent we would decrement the counts as below
+
+ 
+ once the loop got exausted , we go and check if the candidates really satisfy the majority element conditions, i will run a loop to check
+ and add them into a result array.
+
+edge case:
+When counter2 is zero, the algorithm will take a new element as candidate2. Now, if that new element is the same as candidate1, here's what happens:
+In this case, the algorithm will still assign the new element as candidate2, even though it's the same as candidate1. However, since both candidates are now the same, the algorithm will essentially be counting the occurrences of the same element twice.
+To avoid this issue, a more optimized approach would be to check if the new element is the same as candidate1 before assigning it as candidate2. If they are the same, you can simply increment counter1 instead of assigning the new element as candidate2.
+This optimization ensures that the algorithm accurately counts the occurrences of distinct elements, avoiding double-counting of the same element ¹.
+
+ */
+var majorityElement = function (nums) {
+    let count1 = 0, count2 = 0;
+    let m1, m2;
+    let condition = Math.floor(nums.length / 3);
+    for (let i = 0; i < nums.length; i++) {
+        if (m1 != null && m1 == nums[i]) {
+            count1++;
+        } else if (m2 != null && m2 == nums[i]) {
+            count2++;
+        } else if (count1 == 0) {
+            m1 = nums[i]
+            count1++;
+        }
+        else if (count2 == 0) {
+            m2 = nums[i]
+            count2++;
+        } else {
+            count1--;
+            count2--;
+        }
+    }
+    let ans = []
+    count1 = 0
+    count2 = 0;
+
+    for (let n of nums) {
+        if (n == m1) count1++;
+        if (n == m2) count2++;
+    }
+
+    if (count1 > condition) ans.push(m1);
+    if (count2 > condition) ans.push(m2);
+
+    return ans;
+};
