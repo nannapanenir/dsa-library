@@ -1,0 +1,38 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+
+ Here the question we needs to understand one thing which is they have given only at most one wrong character out of
+ palindrom string,
+
+ since we need to find the where the miss match occurs in that case either one of the char should be the ans, we will give 
+ it to next helper method with holding two different chars
+
+ it is like incrementing the left+1,right this is case 1, assuming the left is not palindrom chars
+ left,right-1 removing the right char is nothing but right char is not  
+ */
+var validPalindrome = function(s) {
+    let left=0, right=s.length-1;
+
+    while(left<right){
+        if(s.charAt(left)!=s.charAt(right)){
+            return (checkPalindrom(left+1,right,s) || checkPalindrom(left,right-1,s));
+        }
+        left++;
+        right--;
+    }
+    return true;
+};
+
+function checkPalindrom(l,r,str){
+   
+ while(l<r){
+    if(str.charAt(l)!=str.charAt(r)){
+        return false;
+    }
+    l++;
+    r--;
+}
+
+return true;
+}
