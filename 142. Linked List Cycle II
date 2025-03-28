@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+Here the problem is given return the index where the cycle is happening , from the below solution I can come to conculusion this solution is doesn't make any sense.
+
+I have come up with other solution , please look into the other solutio below mentioned.
+ */
+var detectCycle = function(head) {
+    let cur=head;
+    let seen= new Set();
+    while(cur!=null){
+        if(seen.has(cur)){
+            return cur;
+        }else{
+            seen.add(cur);
+            cur=cur.next;
+        }
+    }
+    return null;
+};
