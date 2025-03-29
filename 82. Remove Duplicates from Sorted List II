@@ -1,0 +1,80 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ 
+Always remember two things make sure to use or take help of dummy head node in the problem like this, also when iterating the items let the dummy sit aside and take one more duplicate element that works as current node it will modify the things in main dummy node as below , will get to know the things when debugging things.
+
+This approach is called Sentinel Head.
+
+here we are not doing rocket science things here, just taking the dummy head 
+ */
+var deleteDuplicates = function(head) {
+    let dummyHead= new ListNode(0, head);
+   
+    let res=dummyHead;
+    let curr= head;
+
+    while(curr!=null){
+
+        if(curr.next!=null && curr.val==curr.next.val){
+            while(curr.next!=null && curr.val==curr.next.val){
+                curr=curr.next;
+            }
+            res.next=curr.next;
+        }else{
+            res=res.next
+        }
+        curr=curr.next;
+    }
+ 
+
+    return dummyHead.next;
+
+};
+
+/**
+Figure 1. The list head is to be removed.
+
+The standard way to handle this use case is to use the so-called Sentinel Node. Sentinel nodes are widely used for trees and linked lists such as pseudo-heads, pseudo-tails, etc. They are purely functional and usually don't hold any data. Their primary purpose is to standardize the situation to avoid edge case handling.
+
+For example, let's use here a pseudo-head with zero value to ensure that the situation "delete the list head" could never happen, and all nodes to delete are "inside" the list.
+
+Delete Internal Nodes
+
+The input list is sorted, and we can determine if a node is a duplicate by comparing its value to the node after it in the list. Step by step, we could identify the current sublist of duplicates.
+
+Now it's time to delete it using pointer manipulations. Note that the first node in the duplicates sublist should be removed as well. That means that we have to track the predecessor of the duplicates sublist, i.e., the last node before the sublist of duplicates.
+
+Having predecessor, we skip the entire duplicate sublist and make the predecessor point to the node after the sublist.
+
+  let map= new Map();
+    let cur=head;
+  while(cur!=null){
+    if(map.has(cur.val)){
+        map.set(cur.val, map.get(cur.val)+1);
+    }else{
+        map.set(cur.val, 1);
+    }
+    cur=cur.next;
+  }
+
+   let dummyHead = new ListNode(0);
+    let curr = dummyHead;
+    for(let [key,val] of map){
+       if(val==1){
+         curr.next=new ListNode(key);
+         curr=curr.next;
+       } 
+    }
+
+    return dummyHead.next;
+ */
+
+
