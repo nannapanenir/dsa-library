@@ -1,0 +1,74 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+
+If you take any ordinary string, and concatenate its reverse to it, you'll get a palindrome. This leads to an interesting insight about the converse: every palindrome half is reverse of the other half.
+
+Simply speaking, if one were to start in the middle of a palindrome, and traverse outwards, they'd encounter the same characters, in the exact same order, in both halves!
+
+Since the input string contains characters that we need to ignore in our palindromic check, it becomes tedious to figure out the real middle point of our palindromic input.
+
+Instead of going outwards from the middle, we could just go inwards towards the middle!
+
+So, if we start traversing inwards, from both ends of the input string, we can expect to see the same characters, in the same order.
+
+Here the ihave to understand is make sure if give char at ith or jth place should be either letter or digit, in order we have to check the condtion
+if it is not then w e move a head one char of either ith side or jth side. means we are skipping the char.
+
+since we are traversing the entie string one time only the complexity will be O(N) and space complexity will be O(1).
+
+Also when dealing with palindrom if it is a single word withouth any spacing then we can traverse from both half's and get go towards end of it so it will also gives same output.
+
+ */
+var isPalindrome = function(s) {
+
+let i=0; j=s.length-1;
+
+while(i<j){
+
+    while(i<j && !(s.charAt(i).toLowerCase() >= 'a' && s.charAt(i).toLowerCase() <= 'z') || (s.charAt(i)>="0" && s.charAt(i)<="9") ){
+        i++;
+    }
+    while(i<j && !(s.charAt(i).toLowerCase() >= 'a' && s.charAt(i).toLowerCase() <= 'z') || (s.charAt(i)>="0" && s.charAt(i)<="9") ){
+        j--;
+    }
+    if(s.charAt(i).toLowerCase()!=s.charAt(j).toLowerCase())
+        return false;
+}
+return true;
+};
+
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+    let newStr="";
+
+    for(let i=0;i<s.length;i++){
+        if((s.charAt(i).toLowerCase() >= 'a' && s.charAt(i).toLowerCase() <= 'z') || (s.charAt(i)>="0" && s.charAt(i)<="9")){
+            
+            if(s.charAt(i)>="0" && s.charAt(i)<="9"){
+            newStr+=s.charAt(i)    
+            }else{
+                newStr+=s.charAt(i).toLowerCase();
+            }
+            
+        }
+    }
+
+let l=0;
+let r=newStr.length-1;
+
+while(l<=r){
+
+if(newStr[l]!=newStr[r]){
+    return false;
+}
+   l++;
+    r--
+}
+
+return true;
+};
