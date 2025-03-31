@@ -1,0 +1,40 @@
+/**
+ * @param {string} s
+ * @return {string}
+
+it is same as reverse a string ,or palindrom check, here we are checking only for vowels if that is not the vowel we can shfit to next element. also thing we should notice here is i have used two loops in the inner loop, eventhough the complexity will be 
+is like O(N), not the O(N^2) is because the where are going forward in the string, instead repeating entire array again, this is the reason we get O(N) is time complxity
+we will initialize two pointers, one pointer (referred as left) pointing to the left end of the input string and the other pointer (named as right) pointing to the right end of the string.
+
+The only difference compared to the problem 344 Reverse String is that we don't want to swap all characters instead we want to swap just the vowels. So the left and right pointers as we discussed should be pointing to the vowels only.
+
+To achieve this, we would initialize a left pointer to 0 and keep incrementing it until we get a vowel. Similarly, we initialize the right pointer to the last index and keep decrementing it until it points to a vowel. At each such iteration where both the pointers are pointing to the vowel, we would swap the characters at these pointers.
+ */
+var reverseVowels = function (s) {
+    let left = 0;
+    let right = s.length - 1;
+    let str = s.split('');
+
+    while (left < right) {
+
+        // Move start pointer until it points to a vowel
+        while (left < right && !"aeiouAEIOU".includes(str[left])) {
+            left++;
+        }
+
+        // Move end pointer until it points to a vowel
+        while (left < right && !"aeiouAEIOU".includes(str[right])) {
+            right--;
+        }
+
+        // swap the vowels
+        let temp = str[left];
+        str[left] = str[right];
+        str[right] = temp;
+
+        // move the pointers towards each other     
+        left++;
+        right--;
+    }
+    return str.join('');
+};
