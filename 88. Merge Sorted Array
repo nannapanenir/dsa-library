@@ -1,0 +1,72 @@
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ * 
+ */
+var merge = function(nums1, m, nums2, n) {
+let p1=m-1;
+let p2=n-1;
+
+for(let p=m+n-1;p>=0;p--){
+    if(p2<0)
+        break;
+
+     if(p1>=0 && nums1[p1]>nums2[p2]){
+        nums1[p]=nums1[p1];
+        p1--;
+     }else{
+        nums1[p]=nums2[p2];   
+        p2--;
+     }   
+}
+
+};
+
+
+var merge2=function(){
+    let p1=0;
+    let p2=0;
+    let p3=0;
+    while(p3<(m+n)){
+        if (p2 >= n || (p1 < m && nums1Copy[p1] < nums2[p2])) {
+            nums1[p3] = nums1Copy[p1++];
+            p3++;
+        } else {
+            nums1[p3] = nums2[p2++];
+            p3++;
+        }
+    }
+}
+
+/**
+    using extra space , so the space complexity will be high, this is also a good approach
+    step 1: here the scenario is to add all the second array into first array, so let's copy first array 
+    elements into a another array
+    step 2: now compare elements b/w num1 array with num2 array
+    step 3: hence we found the answer.
+
+ */
+var merge3= function(){
+
+       //copy elements of array1 into another array
+    let nums1Copy=nums1.slice(0,m);
+
+    // take two pointers P1 for array1, P2 for array2
+    let p1=m-1;
+    let p2=n-1;
+    
+    for(let p=(m+n)-1;p>=0;p--){
+        if(p1>=0 && nums1[p1]>nums2[p2]){
+            nums1[p]=nums1[p1];
+            p1--;
+        }else{
+            if(p2>=0){
+                 nums1[p]=nums2[p2];
+                 p2--;
+            }
+        }
+    } 
+}
