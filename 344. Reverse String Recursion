@@ -1,0 +1,54 @@
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+
+
+when we are dealing with recurrsion, understand the situation I mean what will be the base case and how are going to call recurrsion , is it from top to bottom, bottom to top. understand it.
+
+let's say  the below scenario is like if we go from length-1 to zero , can not achive the target. 
+let n=length-1; For every recurrsion the we will be decreasing the element by 1,will be going to hit the base case at 0.
+
+Also we have to know, how do we connect or establish the connection b/w all the function calls.
+
+we have to understand the there are two kinds of recurssions as mentioned above 1. tail recurssion 2.head recurssion
+
+
+
+ */
+var reverseString = function(s) {
+    let left=0, right=s.length-1;
+    return helper(left, right,s );
+    
+};
+
+
+function helper(left, right,s ) {
+  
+
+    if(left>=right){
+        return;
+    }
+        let temp=s[right];
+        s[right]=s[left];
+        s[left]=temp;
+        left++;
+        right--;
+    return  helper(left,  right,s);
+}
+
+var reverseString = function(s) {
+    let l=0;
+    let r=s.length-1;
+
+    while(l<r){
+        let temp=s[r];
+        s[r]=s[l];
+        s[l]=temp;
+        l++;
+        r--;
+    }
+    
+    
+    return helper(0, '', s);
+    
+};
