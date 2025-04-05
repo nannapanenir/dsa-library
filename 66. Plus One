@@ -1,0 +1,40 @@
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+
+   let sum=digits[digits.length-1]+1
+   let carry=0
+   let arr=[];
+    for(let j=digits.length-1;j>=0;j--){
+
+        if(j!=digits.length-1){
+            sum=carry+digits[j];
+            carry=0;
+        }
+        if(sum>9){
+            arr.push(sum%10);
+            carry=sum/10;
+        }
+        if(sum<=9){
+            arr.push(sum);
+            sum=0;
+        }   
+    }
+    if(carry>0){
+         arr.push(carry);
+    }
+    return arr.reverse();
+};
+
+
+var plusOne1 = function(digits) {
+    let total='';
+    digits.forEach((x)=>{
+       total+=x;
+        });
+
+    result=(parseInt(total)+1).toString();
+    return [...result];
+}
