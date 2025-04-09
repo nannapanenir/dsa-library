@@ -1,0 +1,30 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+
+ * This is a simple brutforce solution , we can still reduce it to O(N) solution. since there are no contraints to it we can go with solution:
+ * I hve made solution like asuming the piovt element from first for loop and then calculated the left sum and right sume indivudually, after that I am checking the 
+   equality check. if this is not true, after all the iteration the answer will decide it should be -1 , there are no valid pivot element in test case.
+
+ */
+var findMiddleIndex = function (nums) {
+
+    for (let i = 0; i < nums.length; i++) {
+        let left = 0;
+        let right = nums.length - 1;
+        let leftSum = 0;
+        let rightSum = 0;
+
+        while (left < i) {
+            leftSum += nums[left];
+            left++;
+        }
+        while (i < right) {
+            rightSum += nums[right];
+            right--;
+        }
+
+        if (leftSum == rightSum) return i;
+    }
+    return -1;
+};
