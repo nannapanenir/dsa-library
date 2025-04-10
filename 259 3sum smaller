@@ -1,0 +1,27 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ * the thing is here i want to clarify is when ever find number of triplets all we have to do is when ever we met the condition
+   try to do this condition like highest - lowest we can get the number of triplets we can make using ouut put , we have similer          questestion how we can count the number of triplets.
+ */
+var threeSumSmaller = function(nums, target) {
+    let res=0;
+    nums.sort((a,b)=>a-b);
+    for(let i=0;i<nums.length-2;i++){
+        let left=i+1;
+        let right=nums.length-1;
+        while(left<right){
+            let sum=nums[i]+nums[left]+nums[right];
+            if(sum>=target){
+                right--; 
+                
+            }else  {
+                
+                res+=(right-left)
+                left++;
+            }
+        }
+    }
+return res;
+};
