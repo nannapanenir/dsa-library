@@ -1,0 +1,22 @@
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ * Here all we have to do is like igonore the the target element which is given by the function, and copy remaing elements , take two pointers and one is like for reading
+ * and other is to write the reming values with out modifying the sequence.
+ */
+var removeElement = function (nums, val) {
+
+    
+ let k=0;
+  for(let i=0;i<nums.length;i++){
+    if(nums[i]!=val){
+        nums[k]=nums[i];
+        k++;
+    }
+  }  
+  return k;
+};
+
+
+similar question 2460. Apply Operations to an Array
