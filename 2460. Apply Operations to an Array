@@ -1,0 +1,33 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ * since the question is asked about the some extra operation on the nums array, which is like checking the nums[i] & nums[i+1] since when every we are dealing with such 
+ * kind of question my approach is always taking a element from the array index i as  1 and checking the i-1 equality and if that satisfy apply operations to it.
+ * in this way we don't have to check the additional checks like writing this way 
+ * for(let i=0 ; i<num.length-1;i++){ since we are starting from i=0 we hav to check till n-1 of length}
+ * aslo please remeber that in the below code i have checked nums[i]!=0 is to aviod unneccery operations. which is of no use , so that why i kept nums[i]!=0;
+ * the rest we all know that moving zero to the end.
+ */
+var applyOperations = function(nums) {
+    
+    for(let i=1;i<nums.length;i++){
+        if(nums[i]==nums[i-1] && nums[i]!=0){
+            nums[i-1]*=2;
+            nums[i]=0;
+        }
+    }
+
+    return moveZerosToEnd(nums);
+};
+
+var moveZerosToEnd=function(nums){
+    let k=0;
+    for(let i=0;i<nums.length;i++){
+        if(nums[i]!=0)
+            nums[k++]=nums[i];        
+    }
+    while(k<nums.length){
+        nums[k++]=0;
+    }
+    return nums;
+}
