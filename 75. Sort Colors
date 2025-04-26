@@ -1,8 +1,41 @@
 /**
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
+ *The algorithm uses three pointers: low, mid, and high. low points to the beginning of the array, mid points to the current element being examined, and high points to the end of the  array. 
+ * Here I have taken curr variable instead of mid is because it more concise.
+  
+let's do a dry run of [0, 2, 1, 2, 0, 1].
+
+initially p0 will be at 0 index and p2 will be at length-1 index, the onemore variable curr it travels until it reaches the p2
+
+check for the condition curr<=p2 is satisfies the curr=0 the value of curr is 0 let's swap it with p0 and increment the p0 and curr element.
+
+atleast one swap operation and one increment or decrement since we have written the condtion curr<=p2.
+
+Let's dry run the code with the input nums = [2, 0, 2, 1, 1, 0].
+
+cur is at 0 and p1 also at zero  and p2 will be at n-1,
+
+now entering into while loop and condition satisfies i.e cur <= p2 (cur is at 0 and p2 is at n-1).
+
+checking if cur is double euqal to 0 , no since cur is 2, it will go to next if condition since cur is 2 it satisfies the condition
+
+it will goto the second block of the code , here we have defined a temp variable and assigning it to p2 value which is here 0
+now assiging p2 with cur element so now p2 got new value that is 2, now assigin cur pointer to the previously saved temp value
+now we have decrement the P2-- pointer one step.
+
+            nums[p2] = nums[curr];
+            nums[curr] = temp;
+            p2--;
+ 
+
+Here thing to remember is when value is 2 we have to decrement P2 element only , but where as if it is cur value is zero needs to be
+increment the P1 by one step and cur value also one step. that is the fundamental here.also swap should takes place here.
+
+if it is cur ele is 1 just increment the cur value.
  */
 var sortColors = function (nums) {
+
 
     let p0 = 0;
     let p2 = nums.length - 1;
@@ -27,6 +60,31 @@ var sortColors = function (nums) {
             curr++
         }
     }
+
+
+};
+
+
+var sortColors1 = function (nums) {
+
+
+  let low=0,cur=0,high=nums.length-1;
+
+  while(cur<=high){
+    if(nums[cur]==0){
+        let temp=nums[low];
+        nums[low]=nums[cur];
+        nums[cur]=temp;
+        low++;cur++;
+    }else if(nums[cur]==2){
+        let temp=nums[high];
+        nums[high]=nums[cur];
+        nums[cur]=temp;
+        high--;
+    }else{
+        cur++;
+    }
+  }
 
 };
 
