@@ -1,0 +1,75 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var pivotInde3 = function(nums) {
+    
+
+    
+    for(let i=1;i<nums.length;i++){    
+        nums[i]+=nums[i-1];
+    }
+
+
+    for(let i=0;i<nums.length;i++){    
+     if((nums[i - 1] || 0) === nums[nums.length - 1] - nums[i])
+        return i;        
+    }
+    return -1;
+};
+
+
+var pivotIndex = function(nums) {
+    let sum = 0;
+    for(let i =0;i<nums.length;i++){
+        sum += nums[i];
+    } 
+
+    let leftSum = 0;
+
+    for(let i = 0; i < nums.length;i++) {
+/**        
+leftSum == sum - nums[i] - leftSum
+
+Pivot Index Intuition
+leftSum calculates the sum of elements to the left of the current index i (from 0 to i-1).
+To find the pivot index, we compare leftSum with the sum of elements to the right of i, which is calculated as totalSum - leftSum - nums[i].
+By subtracting nums[i], we're effectively excluding the pivot element from the sum, allowing us to compare the sum of elements to the left of i with the sum of elements to the right of i.
+
+This intuition can be summarized as:
+
+leftSum (sum of elements to the left of i) = totalSum - leftSum - nums[i] (sum of elements to the right of i)
+When this condition is met, i is the pivot index.
+Meta AI Response: Here's a neat summary of the intuition: Pivot Index Intuition leftSum calculates the sum of elements to the left of the current index i (from 0 to i-1). 
+To find the pivot index, we compare leftSum with the sum of elements to the right of i, which is calculated as totalSum - leftSum - nums[i]. By subtracting nums[i], we're effectively excluding the pivot element from the sum, allowing us to compare the sum of elements to the left of i with the sum of elements to the right of i. 
+This intuition can be summarized as: leftSum (sum of elements to the left of i) = totalSum - leftSum - nums[i] (sum of elements to the right of i) When this condition is met, i is the pivot index.
+
+*/
+        if(leftSum == sum - nums[i] - leftSum) return i;
+
+            leftSum += nums[i];
+    } 
+    return -1;
+ 
+};
+/**
+this is the inital code developed by me , which is very nice approach
+ */
+var pivotIndex1= function(nums){
+
+   for(let i = 0; i<nums.length;i++) {
+        let l = 0;
+        let r = nums.length - 1;
+        let leftSum  = 0;
+        let rightSum = 0;
+        while(l < i)  {
+        leftSum+= nums[l];
+        l++;
+        } while( i< r) {
+         rightSum+=nums[r];
+         r--;
+        }
+        if(leftSum == rightSum) return i;
+    }
+    return -1;
+}
