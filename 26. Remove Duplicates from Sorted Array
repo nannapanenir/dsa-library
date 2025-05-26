@@ -1,0 +1,38 @@
+var removeDuplicates = function (nums) {
+    let insertIndex =1;
+    for (let i = 1; i < nums.length; i++) {
+        // We skip to next index if we see a duplicate element
+        if (nums[i - 1] != nums[i]) {
+            /* Storing the unique element at insertIndex index and incrementing
+               the insertIndex by 1 */
+            nums[insertIndex] = nums[i];
+            insertIndex++;
+        }
+       
+    }
+    return insertIndex;
+};
+
+/**
+
+Here I have taken the insertindex as 1 , it means that i am assuming that the value in index 0 is unique element.
+and comparing the next element with it and checking if they are not same.
+
+intution let's take [0,0,1,1,1,2,2,3,3,4]
+
+so i have taken that insertIndex=1; and I am string the for loop from index 1, 
+nums[i]==nums[index-1] comparing with i-1 index which is 0 , initially so here both are same and it won't go inside the for loop
+the index will increase now i will be 2 so now nums[2] is 1 the insertIndex-1 value and parest value are not equal so it will go to
+inside the if condition , proceed to next statements
+ */
+var removeDuplicates1 = function (nums) {
+    let insertIndex =1;
+    for (let i = 1; i < nums.length; i++) {
+       
+        if(nums[i]!=nums[insertIndex-1]){
+            nums[insertIndex] = nums[i];
+             insertIndex++;
+        }
+    }
+    return insertIndex;
+};
