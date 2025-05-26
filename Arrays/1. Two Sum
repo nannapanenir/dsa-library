@@ -1,0 +1,60 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ *  we have to understand that, when there's no way to solve this kind of problem , we have to use hasmaps,we here we are saving the second element with current index 
+ * if it is prasent then it will get returned 
+ *   A+B=TARGET;
+ *   B=TARGET-A; WILL GIVE US VALUE B.
+ */
+var twoSum = function(nums, target) {
+   
+   let map= new Map();
+   for(let i=0;i<nums.length;i++){
+        if(map.has(nums[i]))
+            return [map.get(nums[i]),i];
+        let key=(target-nums[i]);
+        map.set(key,i);   
+   }
+ return [-1,-1];
+};
+
+
+
+
+var twoSum1 = function(nums, target) {
+    const x = new Map();
+    // for(let i=0; i<nums.length;i++){
+    //     const y= x.get(nums[i]);
+    //     if(y!=undefined){
+    //         return [i,y];
+    //     }
+    //     x.set(target-nums[i],i);
+    // }
+    let left=0, right=nums.length-1;
+    while(left<right){
+     mid=left+right;
+     if(target==mid){
+        return [left,right]
+     }else if(mid>target){
+        right--;
+     }else{
+        left++;
+     }
+    }
+ return [-1,-1];
+
+};
+
+/**
+This will work only when the given array is sorted.
+let left=0,right=nums.length-1;
+
+while(left<right){
+    if(target==(nums[left]+nums[right])) return [left,right];
+    else if(target<(nums[left]+nums[right])) right--;
+    else left++
+}
+return [-1,-1];
+
+ */
